@@ -1,0 +1,10 @@
+---
+- name: "Docker | Download docker-compose {{ docker_compose_version }}"
+  get_url:
+    url: "{{ docker_compose_package_url }}"
+    dest: "{{ docker_compose_path }}"
+
+- name: Docker | Make docker-compose executable
+  file:
+    dest: "{{ docker_compose_path }}"
+    mode: +x

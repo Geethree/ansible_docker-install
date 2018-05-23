@@ -1,0 +1,4 @@
+---
+- name: Docker | Verify that the system is supported
+  include_role:
+    name: system_checks

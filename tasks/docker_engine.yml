@@ -1,0 +1,36 @@
+---
+- name: Docker | Install dependencies
+  apt: 
+    name: "{{ item }}"
+    update_cache: yes
+  with_items: "{{ docker_apt_depedencies }}"
+
+- name: Docker | Add apt key
+  apt_key:
+    url: "{{ docker_apt_key_url }}"
+    id: "{{ docker_apt_key_fingerprint }}"
+    state: present
+
+- name: Docker | Add apt repoository
+  apt_repository:
+    repo: "{{ docker_repo }}"
+    state: present
+
+- name: Docker | Install Docker-ce {{ docker_version }}
+  apt:
+    name: "{{ docker_apt_package }}={{ docker_version_ubuntu }}"
+    update_cache: yes
+    force: yes
+    dpkg_options: force-downgrade
+
+- name: Docker | Create docker user group
+  group:
+    name: docker
+    state: present
+
+- name: "Docker | Adding {{ ansible_env.USER }} to docker group"
+  user:
+    name: "{{ ansible_env.USER }}"
+    groups: docker
+    append: yes
+

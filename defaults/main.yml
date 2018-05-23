@@ -1,0 +1,26 @@
+---
+#################
+# Docker engine #
+#################
+docker_version: 17.09.0
+docker_apt_key_url: https://download.docker.com/linux/ubuntu/gpg
+docker_apt_key_fingerprint: 0EBFCD88
+docker_apt_package: docker-ce
+docker_apt_depedencies:
+  - apt-transport-https
+  - ca-certificates
+  - curl
+  - software-properties-common
+
+docker_repo: "deb [arch=amd64] https://download.docker.com/linux/ubuntu {{ ansible_distribution_release }} stable"
+docker_version_ubuntu: "{{ docker_version }}~ce-0~ubuntu"
+
+##################
+# docker-compose #
+##################
+docker_compose_version: 1.16.1
+docker_compose_package_url:
+  "https://github.com/docker/compose/releases/download/{{ docker_compose_version }}\
+   /docker-compose-{{ ansible_system }}-{{ ansible_userspace_architecture }}"
+docker_compose_path: /usr/local/bin/docker-compose
+

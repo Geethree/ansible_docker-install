@@ -1,0 +1,14 @@
+---
+#- include_tasks: fail_when.yml
+#  tags:
+#    - docker_engine
+#    - docker_compose
+
+- import_tasks: docker_engine.yml
+  become: true
+  tags: docker_engine
+
+- import_tasks: docker_compose.yml
+  become: true
+  tags: docker_compose
+
